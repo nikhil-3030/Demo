@@ -1,0 +1,25 @@
+import heapq
+
+graph = {
+    'A': {'B': 1, 'C': 4},
+    'B': {'A': 1, 'C': 2, 'D': 5},
+    'C': {'A': 4, 'B': 2, 'D': 1},
+    'D': {'B': 5, 'C': 1}
+}
+
+def ospf(start):
+    cost = {node: float('inf') for node in graph}
+    cost[start] = 0
+    pq = [(0, start)]
+
+    while pq:
+        curr_cost, node = heapq.heappop(pq)
+        for neighbor, weight in graph[node].items():
+            new_cost = curr_cost + weight
+            if new_cost < cost[neighbor]:
+                cost[neighbor] = new_cost
+                heapq.heappush(pq, (new_cost, neighbor))
+    
+    return cost
+
+print("Shortest path cost from A:", ospf('A'))

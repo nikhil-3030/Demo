@@ -1,0 +1,14 @@
+#include <stdio.h>
+#define V 4
+int g[V][V] = {{0,1,4,99},{1,0,2,5},{4,2,0,1},{99,5,1,0}}, d[V]={99,99,99,99}, v[V]={0};
+
+int main() {
+    d[0]=0;
+    for(int i=0,u,min,j;i<V;i++) {
+        min=99;
+        for(j=0;j<V;j++) if(!v[j] && d[j]<min) min=d[j],u=j;
+        v[u]=1;
+        for(j=0;j<V;j++) if(!v[j] && d[u]+g[u][j]<d[j]) d[j]=d[u]+g[u][j];
+    }
+    for(int i=0;i<V;i++) printf("To %d: %d\n", i, d[i]);
+}

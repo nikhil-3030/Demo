@@ -1,0 +1,11 @@
+#include <stdio.h>
+#define N 5
+int main() {
+    int i, win = 3;
+    for(i = 0; i < N; i++) {
+        printf("Sending frame %d\n", i);
+        if((i+1) % win == 0 || i == N-1)
+            printf("Waiting for ACK up to frame %d\n", i);
+    }
+    return 0;
+}

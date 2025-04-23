@@ -1,0 +1,22 @@
+def crc_remainder(data, poly):
+    data += '0' * (len(poly) - 1)  # Append zeros
+    data = list(data)
+
+    for i in range(len(data) - len(poly) + 1):
+        if data[i] == '1':
+            for j in range(len(poly)):
+                data[i + j] = str(int(data[i + j] != poly[j]))
+    return ''.join(data[-(len(poly) - 1):])  # Return CRC bits
+
+# Input binary data
+data = '1101011011'
+
+# Define polynomials
+crc12 = '1100000001111'
+crc16 = '11000000000000101'
+crc_ccitt = '10001000000100001'
+
+# Print CRC results
+print("CRC-12    :", crc_remainder(data, crc12))
+print("CRC-16    :", crc_remainder(data, crc16))
+print("CRC-CCITT :", crc_remainder(data, crc_ccitt))

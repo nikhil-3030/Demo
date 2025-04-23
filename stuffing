@@ -1,0 +1,16 @@
+data = "AFLAGBESC"
+stuffed = data.replace("ESC", "ESCESC").replace("FLAG", "ESCFLAG")
+print("Char Stuffed:", stuffed)
+
+
+
+bits = "01111110"
+stuffed = ""
+count = 0
+for b in bits:
+    stuffed += b
+    count = count + 1 if b == '1' else 0
+    if count == 5:
+        stuffed += '0'
+        count = 0
+print("Bit Stuffed:", stuffed)
